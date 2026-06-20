@@ -6,18 +6,6 @@ import { useRouter } from 'next/navigation'
 import { LogoMark, Check, SunIcon, MoonIcon } from '@/components/icons'
 import { CREW, PROBLEMS, STEPS, FAQS } from './LandingPage.data'
 
-const SIGN_IN = '/sign-in'
-const DEMO = '/app'
-
-const WRAP = 'mx-auto max-w-280 px-7'
-const KICKER = 'font-mono text-xs uppercase tracking-[0.12em] text-accent font-medium'
-const BTN =
-  'inline-flex items-center gap-2 rounded-[10px] px-4.5 py-2.5 text-sm font-medium border border-transparent cursor-pointer transition-all duration-150 whitespace-nowrap'
-const BTN_PRIMARY = `${BTN} btn-primary text-(--accent-ink) border-accent hover:brightness-95`
-const BTN_GHOST = `${BTN} btn-ghost text-(--ink) border-(--border-2)`
-const BTN_LG = 'px-6 py-3.5 text-[15px] rounded-xl'
-const SEC_H2 = 'font-serif font-normal text-[44px] leading-[1.08] tracking-[-0.02em] my-[14px_0_16px]'
-
 export default function LandingPage() {
   const router = useRouter()
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -45,7 +33,7 @@ export default function LandingPage() {
         e.preventDefault()
         email = (e.currentTarget.querySelector('input')?.value || '').trim()
       }
-      router.push(SIGN_IN + (email ? '?email=' + encodeURIComponent(email) : ''))
+      router.push('/sign-in' + (email ? '?email=' + encodeURIComponent(email) : ''))
     },
     [router],
   )
@@ -60,9 +48,9 @@ export default function LandingPage() {
       {/* ── Nav ── */}
       <header
         className="sticky top-0 z-50 border-b border-border backdrop-blur-md [backdrop-filter:blur(12px)_saturate(150%)]"
-        style={{ background: 'color-mix(in srgb,var(--bg) 86%,transparent)' }}
+        style={{ background: 'color-mix(in srgb,var(--bg) 86%)' }}
       >
-        <div className={`${WRAP} flex items-center gap-3 h-16`}>
+        <div className="mx-auto max-w-280 px-7 flex items-center gap-3 h-16">
           <Link href="#top" className="flex items-center gap-2.25 text-lg font-semibold tracking-[-0.01em]">
             <LogoMark /> Quorum
           </Link>
@@ -79,13 +67,23 @@ export default function LandingPage() {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-2.5">
-            <button className={`${BTN_GHOST} px-2.75! py-2.25!`} onClick={toggleTheme} aria-label="Toggle dark mode">
+            <button
+              className="inline-flex items-center gap-2 rounded-[10px] px-4.5 py-2.5 text-sm font-medium border cursor-pointer transition-all duration-150 whitespace-nowrap btn-ghost text-(--ink) border-(--border-2)"
+              onClick={toggleTheme}
+              aria-label="Toggle dark mode"
+            >
               {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
             </button>
-            <Link className={`${BTN_GHOST} hidden sm:inline-flex`} href={`${SIGN_IN}?mode=login`}>
+            <Link
+              className="items-center gap-2 rounded-[10px] px-4.5 py-2.5 text-sm font-medium border cursor-pointer transition-all duration-150 whitespace-nowrap btn-ghost text-(--ink) border-(--border-2) hidden sm:inline-flex"
+              href="/sign-in?mode=login"
+            >
               Log in
             </Link>
-            <Link className={BTN_PRIMARY} href={SIGN_IN}>
+            <Link
+              className="inline-flex items-center gap-2 rounded-[10px] px-4.5 py-2.5 text-sm font-medium border cursor-pointer transition-all duration-150 whitespace-nowrap btn-primary text-(--accent-ink) border-accent hover:brightness-95"
+              href="/sign-in"
+            >
               Get started
             </Link>
           </div>
@@ -95,7 +93,7 @@ export default function LandingPage() {
       <main id="top">
         {/* ── Hero ── */}
         <section className="pt-23 pb-18">
-          <div className={`${WRAP} grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center`}>
+          <div className="mx-auto max-w-280 px-7 grid grid-cols-1 lg:grid-cols-[1.05fr_0.95fr] gap-14 items-center">
             <div>
               <h1 className="font-serif font-normal text-[54px] leading-[1.16] tracking-[-0.02em] my-[16px_0_32px]">
                 It runs your business. You just <em className="italic text-accent">approve.</em>
@@ -112,7 +110,10 @@ export default function LandingPage() {
                   className="flex-1 px-4 py-3.25 rounded-[11px] border border-(--border-2) text-[15px] text-(--ink) outline-none focus:border-accent"
                   style={{ background: 'var(--panel)' }}
                 />
-                <button className={`${BTN_PRIMARY} ${BTN_LG}`} type="submit">
+                <button
+                  className="inline-flex items-center gap-2 font-medium border border-accent cursor-pointer transition-all duration-150 whitespace-nowrap btn-primary text-(--accent-ink) hover:brightness-95 px-6 py-3.5 text-[15px] rounded-xl"
+                  type="submit"
+                >
                   Get started
                 </button>
               </form>
@@ -166,7 +167,7 @@ export default function LandingPage() {
                       style={{
                         background: 'color-mix(in srgb,var(--atlas) 22%,var(--panel))',
                         color: 'var(--atlas)',
-                        border: '1px solid color-mix(in srgb,var(--atlas) 40%,transparent)',
+                        border: '1px solid color-mix(in srgb,var(--atlas) 40%)',
                       }}
                     >
                       H
@@ -194,10 +195,12 @@ export default function LandingPage() {
 
         {/* ── Problem ── */}
         <section className="py-22 text-(--dk-ink)" style={{ background: 'var(--dk-bg)' }}>
-          <div className={WRAP}>
+          <div className="mx-auto max-w-280 px-7">
             <div className="max-w-165 mb-12">
-              <div className={KICKER}>The founder&apos;s dilemma</div>
-              <h2 className={`${SEC_H2} text-(--dk-ink)`}>
+              <div className="font-mono text-xs uppercase tracking-[0.12em] text-accent font-medium">
+                The founder&apos;s dilemma
+              </div>
+              <h2 className="font-serif font-normal text-[44px] leading-[1.08] tracking-[-0.02em] my-[14px_0_16px] text-(--dk-ink)">
                 You&apos;re the CEO, the marketer, the recruiter and the bookkeeper.
               </h2>
               <p className="text-[17px] text-(--dk-ink2) leading-[1.55]">
@@ -223,10 +226,14 @@ export default function LandingPage() {
 
         {/* ── Departments ── */}
         <section className="py-22" id="crew">
-          <div className={WRAP}>
+          <div className="mx-auto max-w-280 px-7">
             <div className="max-w-165 mb-12">
-              <div className={KICKER}>Why it&apos;s different</div>
-              <h2 className={SEC_H2}>It does the work — and learns your whole business.</h2>
+              <div className="font-mono text-xs uppercase tracking-[0.12em] text-accent font-medium">
+                Why it&apos;s different
+              </div>
+              <h2 className="font-serif font-normal text-[44px] leading-[1.08] tracking-[-0.02em] my-[14px_0_16px]">
+                It does the work — and learns your whole business.
+              </h2>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {CREW.map((c, i) => (
@@ -254,10 +261,12 @@ export default function LandingPage() {
 
         {/* ── How ── */}
         <section className="py-22" id="how" style={{ background: 'var(--panel)' }}>
-          <div className={WRAP}>
+          <div className="mx-auto max-w-280 px-7">
             <div className="max-w-165 mb-12">
-              <div className={KICKER}>How it works</div>
-              <h2 className={SEC_H2}>You set the goals. The crews do the work.</h2>
+              <div className="font-mono text-xs uppercase tracking-[0.12em] text-accent font-medium">How it works</div>
+              <h2 className="font-serif font-normal text-[44px] leading-[1.08] tracking-[-0.02em] my-[14px_0_16px]">
+                You set the goals. The crews do the work.
+              </h2>
               <p className="text-[17px] text-(--ink-2) leading-[1.55]">
                 Quorum runs the day-to-day across every department and brings only the big calls to you — so you manage
                 decisions, not people.
@@ -277,9 +286,11 @@ export default function LandingPage() {
 
         {/* ── Control ── */}
         <section className="py-22" id="control">
-          <div className={`${WRAP} grid grid-cols-1 lg:grid-cols-2 gap-14 items-center`}>
+          <div className="mx-auto max-w-280 px-7 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
             <div>
-              <div className={KICKER}>You&apos;re always in charge</div>
+              <div className="font-mono text-xs uppercase tracking-[0.12em] text-accent font-medium">
+                You&apos;re always in charge
+              </div>
               <h2 className="font-serif font-normal text-[44px] tracking-[-0.02em] leading-[1.08] my-[14px_0_16px]">
                 Autonomy with a seatbelt.
               </h2>
@@ -384,7 +395,7 @@ export default function LandingPage() {
               >
                 <span
                   className="w-8.5 h-8.5 rounded-full flex items-center justify-center text-(--dk-good)"
-                  style={{ background: 'color-mix(in srgb,var(--up) 22%,transparent)' }}
+                  style={{ background: 'color-mix(in srgb,var(--up) 22%)' }}
                 >
                   <Check stroke="currentColor" />
                 </span>
@@ -424,10 +435,12 @@ export default function LandingPage() {
 
         {/* ── Pricing ── */}
         <section className="py-22" id="pricing" style={{ background: 'var(--panel)' }}>
-          <div className={WRAP}>
+          <div className="mx-auto max-w-280 px-7">
             <div className="max-w-165 mx-auto text-center mb-12">
-              <div className={KICKER}>Pricing</div>
-              <h2 className={SEC_H2}>Less than a junior hire. More than a whole team.</h2>
+              <div className="font-mono text-xs uppercase tracking-[0.12em] text-accent font-medium">Pricing</div>
+              <h2 className="font-serif font-normal text-[44px] leading-[1.08] tracking-[-0.02em] my-[14px_0_16px]">
+                Less than a junior hire. More than a whole team.
+              </h2>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 max-w-215 mx-auto">
               <div className="rounded-[18px] p-8 border border-border" style={{ background: 'var(--bg)' }}>
@@ -470,7 +483,10 @@ export default function LandingPage() {
                     </li>
                   ))}
                 </ul>
-                <Link className={`${BTN_PRIMARY} ${BTN_LG} w-full justify-center`} href={SIGN_IN}>
+                <Link
+                  className="inline-flex items-center gap-2 font-medium border border-accent cursor-pointer transition-all duration-150 whitespace-nowrap btn-primary text-(--accent-ink) hover:brightness-95 px-6 py-3.5 text-[15px] rounded-xl w-full justify-center"
+                  href="/sign-in"
+                >
                   Start free 7-day trial
                 </Link>
               </div>
@@ -480,10 +496,12 @@ export default function LandingPage() {
 
         {/* ── FAQ ── */}
         <section className="py-22">
-          <div className={WRAP}>
+          <div className="mx-auto max-w-280 px-7">
             <div className="max-w-165 mb-12">
-              <div className={KICKER}>Questions</div>
-              <h2 className={SEC_H2}>The things founders ask.</h2>
+              <div className="font-mono text-xs uppercase tracking-[0.12em] text-accent font-medium">Questions</div>
+              <h2 className="font-serif font-normal text-[44px] leading-[1.08] tracking-[-0.02em] my-[14px_0_16px]">
+                The things founders ask.
+              </h2>
             </div>
             <div className="max-w-180">
               {FAQS.map((f, i) => (
@@ -500,13 +518,13 @@ export default function LandingPage() {
       </main>
 
       <footer className="border-t border-border py-10">
-        <div className={`${WRAP} flex items-center gap-4 flex-wrap`}>
+        <div className="mx-auto max-w-280 px-7 flex items-center gap-4 flex-wrap">
           <Link href="#top" className="flex items-center gap-2.25 text-base font-semibold">
             <LogoMark size={18} /> Quorum
           </Link>
           <span className="text-muted text-[13px]">© 2026 Quorum. The AI operator for independent brands.</span>
           <div className="ml-auto flex gap-5.5">
-            <Link href={DEMO} className="text-[13px] text-muted hover:text-(--ink)">
+            <Link href="/app" className="text-[13px] text-muted hover:text-(--ink)">
               Live demo
             </Link>
             <a href="#crew" className="text-[13px] text-muted hover:text-(--ink)">
@@ -548,7 +566,7 @@ const TOKENS = `
 }
 .quorum-landing ::selection { background:var(--accent); color:var(--accent-ink); }
 .quorum-landing .btn-primary { background:var(--accent); }
-.quorum-landing .btn-ghost { background:transparent; }
+.quorum-landing .btn-ghost { background; }
 .quorum-landing .btn-ghost:hover { background:var(--panel); }
 .quorum-landing .faq-item summary { list-style:none; }
 .quorum-landing .faq-item summary::-webkit-details-marker { display:none; }
