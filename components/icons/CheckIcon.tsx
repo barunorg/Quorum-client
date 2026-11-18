@@ -1,8 +1,8 @@
-export default function CheckIcon({ stroke = 'var(--up)' }: { stroke?: string }) {
+export default function CheckIcon({ size = 15, stroke = 'var(--up)' }: { size?: number; stroke?: string }) {
   return (
     <svg
-      width="15"
-      height="15"
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
       stroke={stroke}
